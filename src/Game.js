@@ -56,22 +56,45 @@ const handlerestart = ()=>{
     ]
  
 const allgameArray = [
-[[0, 0], [0, 1], '4/'],
-[[0, 2], [0, 3], [1, 3], '9+'],
-[[1, 0], [2, 0], [3, 0], '6'],
-[ [2, 1], [3, 1], [3, 2], '24'],
-[[1, 1],[1, 2], [2, 2], [2, 3], '12*'],
-[[3, 3], '2']] 
+    [[0, 0], [0, 1], '4/'],
+    [[0, 2], [0, 3], [1, 3], '9+'],
+    [[1, 0], [2, 0], [3, 0], '6'],
+    [ [2, 1], [3, 1], [3, 2], '24'],
+    [[1, 1],[1, 2], [2, 2], [2, 3], '12*'],
+    [[3, 3], '2']
+] 
 
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+const StartGame=()=>{
+    // send (mode, size)
+    // GET Setup (allgameArray)
+    setrenderBoard(true)
+}
+
+const handleSolveCLicked = ()=>{
+    // send (SelectedAlgo)
+    // GET SOLUTION (gameData)
+      setrestart(true)
+      setSolveMode(true)
+  }
+
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+// GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
+
+ 
 const randGenerateSize  = (size)=>{
     const rows = new Array(size).fill(10)
     const generated = rows.map(r=>  new Array(size).fill(10))
     return generated
 }
 
-const StartGame=()=>{
-    setrenderBoard(true)
-}
 
 const gameArray = allgameArray.map(g=> g.slice(0,-1))
  
@@ -80,7 +103,6 @@ const gameArray = allgameArray.map(g=> g.slice(0,-1))
     
 
 useEffect(() => {
-    randGenerateSize(5) 
   }, []);
 
   const hasNeigbour = ([row,col],group)=>{ 
@@ -98,6 +120,13 @@ useEffect(() => {
   const DrawBorder = (rowIndex, colIndex)=>{
 
     let top = 1 , left=1, renderSymbol = 0
+
+
+    // COMMMMMETN
+    // COMMMMMETN
+    // COMMMMMETN
+    // COMMMMMETN
+    // COMMMMMETN
     const groupIndex = FindRowIndex(rowIndex,colIndex)
     const groubbbb = gameArray[groupIndex]
     const sortedx = groubbbb.sort((a,b)=>a[0]-b[0])
@@ -109,13 +138,16 @@ useEffect(() => {
     const result = hasNeigbour([rowIndex,colIndex],groubbbb)
     top = result[1]
     left= result[0]
+
+    // COMMMMMETN
+    // COMMMMMETN
+    // COMMMMMETN
+    // COMMMMMETN
+    // COMMMMMETN
     
     return [top,left,renderSymbol]
   }
-  const handleSolveCLicked = ()=>{
-      setrestart(true)
-      setSolveMode(true)
-  }
+
   return (
 <Box sx={{
     display:"flex",
@@ -124,12 +156,7 @@ useEffect(() => {
     height:"100vh",
     flexDirection:"column", 
 }}>
-
-    {/* <Box sx={{marginBottom:"60px", background: "#aaa3", border:"1px solid #fffa" ,padding:"17px 50px",borderRadius:"6px",fontFamily:"sans-serif",}}>
-        <Typography variant="h3">
-            The last fucken project
-        </Typography>
-    </Box> */}
+ 
     {renderBoard ?<div>
         <Box sx={{
             border:"2px solid #999",
