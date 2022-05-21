@@ -34,10 +34,10 @@ export default function App() {
     "8 \u00D7 8",
     "9 \u00D7 9",
   ];
-  const modes = ["+", "+, -", "+, -, \u00D7", "+, -, \u00D7, \u00F7"];
+  const modes = ["+", "+ -", "+ - \u00D7", "+ - \u00D7 \u00F7"];
 
   const handleSelectSize = (algo) => {
-    setSize(Number(algo[0]));
+    setSize(algo);
   };
 
   const handleSelectMode = (algo) => {
@@ -187,7 +187,7 @@ export default function App() {
               borderRight: "8px solid #fff",
             }}
           >
-            {randGenerateSize(size).map((row, rowIndex) => (
+            {randGenerateSize(Number(size[0])).map((row, rowIndex) => (
               <Grid key={rowIndex} container>
                 {row.map((col, colIndex) => {
                   const [BT, BL, drawSympol] = DrawBorder(rowIndex, colIndex);
