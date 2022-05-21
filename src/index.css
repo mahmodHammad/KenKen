@@ -1,0 +1,363 @@
+
+body {
+  background-color: #333;
+  margin: 0; 
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* background-color: #eee; */
+  overflow: hidden;
+  color:#fff
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+video{
+  display:none;
+}
+
+#header{
+  border: 1px solid darkred;
+  position: fixed;
+  color:darkred;
+  padding:5px;
+  
+  background-color: #f442;
+}
+
+@keyframes rectFade{
+  0% {transform: scale(1.0);}
+  30% { transform: scale(0.6);}
+  /* 40% { transform: scale(0.4);} */
+  100% { transform: scale(1.0);} 
+}
+
+@keyframes sound{
+  0% {opacity:0;}
+  100% { opacity: 1;} 
+}
+
+@keyframes handmove{
+  0% {transform: translateX(-10px)} 
+  50% {transform: translateX(10px)} 
+  100% {transform: translateX(-10px)} 
+}
+
+@keyframes rotateCircle{
+  0% {transform: rotateZ(8deg)} 
+  50% {transform: rotateZ(-8deg)} 
+  100% {transform: rotateZ(8deg)} 
+}
+
+@keyframes hemateAnimation{
+  0% {transform: translateY(-8px) rotateZ(-5deg)} 
+  90% {transform: translateY(0px) rotateZ(-5deg)} 
+  100% {transform: rotateZ(0px) rotateZ(0deg)} 
+}
+
+.c1{
+  animation: rectFade 2s ease infinite;
+  animation-delay: 0.1s;
+  transform-origin: center; 
+} 
+
+.c2{
+  animation: rectFade 2s ease infinite;
+  animation-delay: 0.3s;
+  transform-origin: center; 
+} 
+
+.c3{
+  animation: rectFade 2s ease infinite;
+  margin:50px;
+  animation-delay: 0.1s;
+  transform-origin: center; 
+} 
+.c4{
+  animation: rectFade 2s ease infinite;
+  animation-delay: 0.3s;
+  color:"white";
+  transform-origin: center; 
+  position: fixed;
+  top:100px;
+  left:100px
+} 
+
+.cc1{
+  animation: rectFade 1.5s ease infinite;
+  animation-delay: 0.15s;
+  transform-origin: center; 
+}
+.cc2{
+  animation: rectFade 1.5s ease infinite;
+  /* animation-delay: 0.1s; */
+  transform-origin: center; 
+}
+
+.s2{
+  animation: sound 1.4s ease infinite;
+  animation-delay: 0s;
+
+  transform-origin: center; 
+}
+.s3{
+  animation: sound 1.4s ease infinite;
+  animation-delay: 0.3s;
+
+  transform-origin: center; 
+}
+.s4{
+  animation: sound 1.4s ease infinite;
+  animation-delay: 0.5s;
+  transform-origin: center; 
+}
+
+.rotateCircle{
+  /* display: none; */
+  transform-origin: center; 
+  animation: rotateCircle 1.6s linear infinite;
+}
+
+.rotateHand{
+  animation: handmove 1.6s linear infinite;
+  transform-origin: center; 
+}
+
+.hemate{
+  animation: hemateAnimation 0.8s linear ;
+  transform-origin: top;
+}
+
+#workerIconPosFIx{
+  margin-top: 100px;
+}
+
+#hotspotIcon{
+  margin-top: 135px;
+}
+
+.workerIconPosFIx{
+  transform: translate(-16px, 45px);
+}
+ 
+
+.labelx{
+  color:"white";
+}
+
+.discovered:hover{
+  /* cursor: pointer; */
+}
+.notdiscovered:hover{
+  /* cursor: pointer; */
+}
+
+.hotspotContainer{ 
+  padding:30px;
+}
+
+.dotpagination{
+  /* margin-top: 40px; */
+}
+
+.textInput{
+  width:86%;
+  padding: 20px 22px;
+  margin-top: 5px;
+}
+
+.textInputlabel{
+
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  color: #FFFFFF;
+}
+
+
+
+@keyframes top-clip {
+	0%{}
+	50%{transform: translateY(0px);}
+	100%{transform: translateY(-61px);}
+}
+
+@keyframes bottom-sand-path {
+	0%{}
+	50%{transform: translateY(0);}
+	100%{transform: translateY(0);}
+}
+
+@keyframes bottom-sand-g {
+	0%{}
+	85%{transform: translateY(0);}
+	100%{transform: translateY(-24px);}
+}
+
+@keyframes hourglass-rotation {
+	50%{transform: rotateZ(0);}
+	100%{transform: rotateZ(180deg);}
+}
+@keyframes face {
+	0%{opacity: 0;}
+	100%{opacity: 1;}
+}
+@keyframes face2 {
+	0%{opacity: 1;}
+	100%{opacity: 0;}
+}
+
+
+#top-sand #top-clip-path rect,
+#bottom-sand path,
+#bottom-sand g,
+svg {
+	animation-duration: 5s;
+	animation-delay: 1s; 
+	animation-iteration-count: infinite;
+}
+
+#top-sand #top-clip-path rect {
+	animation-name: top-clip;
+}
+
+#bottom-sand path {
+	transform: translateY(-20px);
+	animation-name: bottom-sand-path;
+}
+
+#bottom-sand g {
+	animation-name: bottom-sand-g;
+}
+
+.playScreen  #Time2SVG { 
+    margin-top: 110px; 
+}
+#Time2SVG {
+  margin-bottom: -30px;
+    margin-left: -25px;
+    /* margin-top: 110px; */
+	animation-name: hourglass-rotation;
+}
+
+ .A_rightEye2 , .A_mouth2{
+  animation: face 1.4s linear ;
+}
+
+.A_rightEye1, .A_mouth1 {
+  /* display: none; */
+  animation: face2 1s linear forwards;
+}
+
+@keyframes ficha1 {
+	0%{ transform: translate(0px ,0px);}
+	100%{ transform: translate(-10px ,10px);}
+}
+
+@keyframes ficha2 {
+	0%{ transform: translate(0px ,0px);}
+	100%{ transform: translate(10px ,-10px);}
+}
+.ficha1{
+  /* display: none; */
+  /* animation: ficha1 1s ease-out forwards; */
+ 
+  transform-origin: center;
+}
+.ficha2{
+  /* display: none; */
+  /* animation: ficha2 1s ease-out forwards; */
+ 
+  transform-origin: center;
+}
+
+@keyframes cpu1 {
+	100%{transform: translate(0 ,9px);}
+}
+@keyframes cpu2 {
+	100%{transform: translate(0 ,-9px);}
+}
+@keyframes cpu3 {
+	100%{transform: translate(9px ,0);}
+}
+@keyframes cpu4 {
+	100%{transform: translate(-9px ,0);}
+}
+ 
+@keyframes box {
+	0%{
+    opacity:1;
+  }
+  80%{
+    opacity:0;  
+  }
+  100%{
+    transform: translate(400px ,0);
+    opacity:0;  
+  }
+}
+
+@keyframes box2 {
+	0%{
+    opacity:0;
+  }
+  80%{
+    opacity:1;  
+  }
+  100%{
+    transform: translate(100px ,0);
+    opacity:1;  
+  }
+}
+.a_box{
+  transform:translateX(100px);
+  /* transform: translate(-170px ,0); */ 
+  /* animation-iteration-count: 10; */
+  /* transform: translate(0px ,0); */
+}
+ 
+ 
+
+.boxLeft{
+  /* display: none; */
+  transform:translateX(-200px);
+ 
+  /* animation-iteration-count: 10; */
+}
+
+/* .path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 10s linear forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+} */
+
+@keyframes pcFade {
+	0%{
+    opacity:0;
+  }
+  100%{
+    opacity:1;  
+  }
+}
+
+
+
+.pc1, .pc2, .pc3, .pc4, .pc5, .pc6, .pc7{
+  opacity:0;
+  
+}
