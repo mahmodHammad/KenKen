@@ -50,6 +50,25 @@ useEffect(() => {
     FindRowIndex(1,2)
   }, []);
 
+  const DrawBorder = (rowIndex, colIndex)=>{
+    let top = 0 , left=0
+    const groupIndex = FindRowIndex(rowIndex,colIndex)
+    const groubbbb = gameArray[groupIndex]
+    const sortedx = groubbbb.sort((a,b)=>a[0]-b[0])
+    const sorted = sortedx.sort((a,b)=>a[1]-b[1])
+    console.log("FFFFF",sorted )
+    const [minY, minX] = sorted[0]
+    //  sorted.forEach(s=>{
+
+    //  })
+    if(colIndex==minX){
+        left=1
+    }
+    if(rowIndex==minY){
+        top=1
+    }
+    return [top ,left]
+  }
   return (
 <Box sx={{
     display:"flex",
@@ -61,20 +80,34 @@ useEffect(() => {
     <Box sx={{
         border:"2px solid #999",
         background:"#fff3",
-        borderRadius:"4px"
+        borderRadius:"4px",
+        borderBottom:"8px solid #fff",
+        borderRight:"8px solid #fff",
+
+
 }}>
         {gameData.map((row,rowIndex)=><Grid container sx={{}}>
-            {row.map((col,colIndex)=><Grid item sx={{display:"inline-flex",
-            width:"150px",height:"150px", border:"1px solid #999",  background:`rgb(${(rann1/3+rann1*FindRowIndex(rowIndex,colIndex))%255},${rann2/2+((rann2 *FindRowIndex(rowIndex,colIndex)))%255},${(rann3/2+rann3 *FindRowIndex(rowIndex,colIndex))%255})`,
-            padding:"0px 20px 20px",  flexDirection: "column", justifyContent:"space-around"}}>
-                    {/* {FindRowIndex(rowIndex,colIndex)} */}
-                    <Box sx={{fontWeight:"bold",fontSize:"26px",color:"#eee"}}>
-                        3+
-                    </Box>
-                    <Box sx={{  display:"flex",justifyContent:"center",fontSize:"46px",fontWeight:"bold" }}>
-                        2
-                    </Box>
-                </Grid>
+                    {row.map((col,colIndex)=>{
+                        const [BT ,BL] = DrawBorder(rowIndex, colIndex)
+                        return(<Grid item sx={{display:"inline-flex",
+                            width:"150px",height:"150px", border:"1px solid #999", 
+                            background:`rgb(
+                            ${(rann1/1+rann1*FindRowIndex(rowIndex,colIndex))%190},
+                            ${rann2/10+((rann2 *FindRowIndex(rowIndex,colIndex)))%100},
+                            ${(rann3/1+rann3 *FindRowIndex(rowIndex,colIndex))%205})`,
+
+                            borderTop:`${BT*8}px solid #fff`, 
+                            borderLeft:`${BL*8}px solid #fff`,
+                            
+                            padding:"0px 20px 20px",  flexDirection: "column", justifyContent:"space-around"}}>
+                            {/* {FindRowIndex(rowIndex,colIndex)} */}
+                            <Box sx={{fontWeight:"bold",fontSize:"26px",color:"#eee"}}>
+                                3+
+                            </Box>
+                            <Box sx={{  display:"flex",justifyContent:"center",fontSize:"46px",fontWeight:"bold" }}>
+                                2
+                            </Box>
+                         </Grid>)}
             )}
         </Grid>
         )}
