@@ -1,6 +1,7 @@
 import React, {useEffect,useState } from "react";
 // import { createTheme ,ThemeProvider,responsiveFontSizes} from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
  
@@ -34,6 +35,11 @@ const allgameArray = [
 [[1, 1],[1, 2], [2, 2], [2, 3], '12*'],
 [[3, 3], '2']] 
 
+const randGenerateSize  = (size)=>{
+    const rows = new Array(size).fill(10)
+    const generated = rows.map(r=>  new Array(size).fill(10))
+    console.log("generated",generated)
+}
 const gameArray = allgameArray.map(g=>{
     // const newRow = g.map(item=>{
     //     return item.slice(0,-1)
@@ -58,6 +64,7 @@ console.log("gameArray",gameArray)
     
 
 useEffect(() => {
+    randGenerateSize(5)
     // const t = [ [2, 1],[2, 2], [2, 3]]
     // hasNeigbour([2,2],t)
     
@@ -118,8 +125,14 @@ useEffect(() => {
     justifyContent:"center",
     alignItems:"center",
     height:"100vh",
-    flexDirection:"row", 
+    flexDirection:"column", 
 }}>
+
+    <Box sx={{marginBottom:"60px", background:"#ffffff06",padding:"10px 20px",borderRadius:"6px"}}>
+        <Typography variant="h3">
+            The last fucken project
+        </Typography>
+    </Box>
     <Box sx={{
         border:"2px solid #999",
         background:"#fff3",
@@ -155,6 +168,11 @@ useEffect(() => {
         </Grid>
         )}
     </Box>
+
+    <Box sx={{marginTop:"60px"}}>
+        <Button variant="contained" sx={{padding:"3px 80px",fontSize:"20px"}} > Solve </Button>
+    </Box>
+
 </Box>
   );
 }
