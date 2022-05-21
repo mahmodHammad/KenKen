@@ -301,7 +301,7 @@ export default function App() {
               sx={{ padding: "14px 80px", fontSize: "20px" }}
             >
               {" "}
-              Solve{" "}
+              Generate{" "}
             </Button>
           ) : null}
         </Box>
