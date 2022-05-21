@@ -3,6 +3,7 @@ import { createTheme ,ThemeProvider,responsiveFontSizes} from '@mui/material/sty
 import { green,orange } from '@mui/material/colors';
 import Game from "./Game"
 
+import { purple,pink } from '@mui/material/colors';
 let theme = createTheme({
  
   components: {
@@ -27,9 +28,10 @@ let theme = createTheme({
     },
   },
   palette: { 
+    mode: 'dark',
     spacing: 4,
     primary: {
-      main: "#E98300",
+      main: pink.A700,
       contrastText: '#fff',
     },
     secondary: {
