@@ -11,6 +11,8 @@ const rann2 = Math.round(Math.random(0) * 200);
 const rann3 = Math.round(Math.random(0) * 400);
 
 export default function App() {
+  const [allgameArray, setAllgameArray] = useState([]);
+  const [gameData, setGameData] = useState([]);
   const [SolveMode, setSolveMode] = useState(false);
   const [size, setSize] = useState("");
   const [mode, setMode] = useState("");
@@ -57,41 +59,79 @@ export default function App() {
 
     setSelectedAlgo(algo);
   };
-  const gameData = [
-    [4, 1, 2, 3],
-    [1, 2, 3, 4],
-    [2, 3, 4, 1],
-    [3, 4, 1, 2],
-  ];
-  const allgameArray = [
-    [[0, 0], [0, 1], "4/"],
-    [[0, 2], [0, 3], [1, 3], "9+"],
-    [[1, 0], [2, 0], [3, 0], "6"],
-    [[2, 1], [3, 1], [3, 2], "24"],
-    [[1, 1], [1, 2], [2, 2], [2, 3], "12*"],
-    [[3, 3], "2"],
-  ];
+  // const gameData = [
+  //   [4, 1, 2, 3],
+  //   [1, 2, 3, 4],
+  //   [2, 3, 4, 1],
+  //   [3, 4, 1, 2],
+  // ];
+  // const allgameArray = [
+  //   [[0, 0], [0, 1], "4/"],
+  //   [[0, 2], [0, 3], [1, 3], "9+"],
+  //   [[1, 0], [2, 0], [3, 0], "6"],
+  //   [[2, 1], [3, 1], [3, 2], "24"],
+  //   [[1, 1], [1, 2], [2, 2], [2, 3], "12*"],
+  //   [[3, 3], "2"],
+  // ];
+  const generateKenKen = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/generate", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          size: Number(size[0]),
+          mode,
+        }),
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        console.log(data);
+        setAllgameArray(data);
+        setrenderBoard(true);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const StartGame = () => {
+    generateKenKen();
+  };
+  const solveKenKen = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/solve", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          puzzle: allgameArray,
+          algorithm: SelectedAlgo,
+        }),
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        console.log(data);
+        setGameData(data);
+        setSolveMode(true);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const handleSolveCLicked = () => {
+    solveKenKen();
+    setrestart(true);
+  };
   allgameArray.forEach((s) => {
     s[s.length - 1] = s.at(-1).replace("*", "\u00D7");
     s[s.length - 1] = s.at(-1).replace("/", "\u00F7");
   });
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-  const StartGame = () => {
-    // send (mode, size)
-    // GET Setup (allgameArray)
-    setrenderBoard(true);
-  };
-
-  const handleSolveCLicked = () => {
-    // send (SelectedAlgo)
-    // GET SOLUTION (gameData)
-    setrestart(true);
-    setSolveMode(true);
-  };
 
   // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
   // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
@@ -115,18 +155,18 @@ export default function App() {
   useEffect(() => {}, []);
 
   const hasNeigbour = ([row, col], group) => {
-    const sameRow = group.filter((g) => g[0] == row);
-    const sameCol = group.filter((g) => g[1] == col);
+    const sameRow = group.filter((g) => g[0] === row);
+    const sameCol = group.filter((g) => g[1] === col);
 
     let hasLeft =
       sameRow.length > 1
-        ? sameRow.findIndex((s) => col == s[1] + 1) !== -1
+        ? sameRow.findIndex((s) => col === s[1] + 1) !== -1
           ? 0
           : 1
         : 1;
     let hasTop =
       sameCol.length > 1
-        ? sameCol.findIndex((s) => row == s[0] + 1) !== -1
+        ? sameCol.findIndex((s) => row === s[0] + 1) !== -1
           ? 0
           : 1
         : 1;
