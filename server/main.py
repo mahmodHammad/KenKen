@@ -1,12 +1,11 @@
 from typing import List
-from pandas import array
-import uvicorn
+from copy import deepcopy
 from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
+unmanipulatedList = None
 class GenerateBody(BaseModel):
     size: int
     mode: str
@@ -33,6 +32,8 @@ async def generate(body: GenerateBody):
             [(2, 1), (3, 1), (3, 2), "24"],
             [(1, 1), (1, 2), (2, 2), (2, 3), "12*"],
             [(3, 3), "2"]]
+    global unmanipulatedList 
+    unmanipulatedList = deepcopy(data)
     for row in data:
         for j in range(len(row)-1):
             row[j] = list(row[j])
