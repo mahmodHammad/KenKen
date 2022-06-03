@@ -76,8 +76,9 @@ def generatePuzzle (dimension):
         puzzle[i] = row
         row = shiftLeftRotate(row)
     
-    for i in range (dimension) :
-        shuffle(puzzle)
+    if (dimension < 7):
+        for i in range (dimension) :
+            shuffle(puzzle)
     return puzzle 
 
 def valid (visited, i , j , L , H):

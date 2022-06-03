@@ -1,17 +1,18 @@
-from typing import List
 from copy import deepcopy
 from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-unmanipulatedList = None
+# from GeneratePuzzle import generatePuzzle, generateCages, assignOpToCage, backtrackingSolution, backtrackingSolutionFC, backtrackingSolutionAC
+from logic import *
+
 class GenerateBody(BaseModel):
     size: int
     mode: str
 
 class SolveBody(BaseModel):
-    puzzle: List
+    size: int
     algorithm: str
 
 app = FastAPI()
@@ -24,28 +25,27 @@ app.add_middleware(
     allow_headers=['*'],
     expose_headers=['*']
 )
+
 @app.post("/generate", status_code=200)
 async def generate(body: GenerateBody):
-    data = [[(0, 0), (0, 1), "4/"],
-            [(0, 2), (0, 3), (1, 3), "9+"],
-            [(1, 0), (2, 0), (3, 0), "6"],
-            [(2, 1), (3, 1), (3, 2), "24"],
-            [(1, 1), (1, 2), (2, 2), (2, 3), "12*"],
-            [(3, 3), "2"]]
-    global unmanipulatedList 
-    unmanipulatedList = deepcopy(data)
-    for row in data:
+    puzzle = generatePuzzle(body.size)
+    cages = generateCages(puzzle)
+    cages = assignOpToCage(puzzle,cages,int(body.mode))
+    for row in cages:
         for j in range(len(row)-1):
             row[j] = list(row[j])
-    res = jsonable_encoder(data)
+    res = jsonable_encoder(cages)
     return JSONResponse(content=res)
 
 @app.post("/solve", status_code=200)
 async def solve(body: SolveBody):
-    data = [[4, 1, 2, 3],
-            [1, 2, 3, 4],
-            [2, 3, 4, 1],
-            [3, 4, 1, 2],
-           ]
+    domains = [[list(range(1,int(body.size)+1)) for y in range(int(body.size))] for x in range(int(body.size))]
+    emptyPuzzle =  [[0 for y in range(int(body.size))] for x in range(int(body.size))]
+    if (body.algorithm == "Backtracking"):
+        data = backtrackingSolution(emptyPuzzle,0,0,int(body.size))
+    elif (body.algorithm == "Backtracking with forward checking"):
+        data = backtrackingSolutionFC(emptyPuzzle,0,0,int(body.size),domains)
+    elif (body.algorithm == "Backtracking with arc consistency"):
+        data = backtrackingSolutionAC (emptyPuzzle,0,0,int(body.size),domains)
     res = jsonable_encoder(data)
     return JSONResponse(content=res)
