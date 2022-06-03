@@ -84,7 +84,7 @@ export default function App() {
         },
         body: JSON.stringify({
           size: Number(size[0]),
-          mode,
+          mode: modes.indexOf(mode),
         }),
       });
       const data = await response.json();
@@ -110,7 +110,7 @@ export default function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          puzzle: allgameArray,
+          size: Number(size[0]) ,
           algorithm: SelectedAlgo,
         }),
       });
@@ -132,12 +132,6 @@ export default function App() {
     s[s.length - 1] = s.at(-1).replace("*", "\u00D7");
     s[s.length - 1] = s.at(-1).replace("/", "\u00F7");
   });
-
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-  // GHANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR
 
   const randGenerateSize = (size) => {
     const rows = new Array(size).fill(10);
@@ -179,11 +173,6 @@ export default function App() {
       left = 1,
       renderSymbol = 0;
 
-    // COMMMMMETN
-    // COMMMMMETN
-    // COMMMMMETN
-    // COMMMMMETN
-    // COMMMMMETN
     const groupIndex = FindRowIndex(rowIndex, colIndex);
     const groubbbb = gameArray[groupIndex];
     const sortedx = groubbbb.sort((a, b) => a[0] - b[0]);
@@ -196,12 +185,6 @@ export default function App() {
     const result = hasNeigbour([rowIndex, colIndex], groubbbb);
     top = result[1];
     left = result[0];
-
-    // COMMMMMETN
-    // COMMMMMETN
-    // COMMMMMETN
-    // COMMMMMETN
-    // COMMMMMETN
 
     return [top, left, renderSymbol];
   };
